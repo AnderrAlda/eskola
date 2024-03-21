@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   roomName: z.string().min(2).max(50),
-  description: z.string().min(2).max(50),
+  description: z.string().min(2).max(200),
   codingLanguage: z.string().min(2).max(50),
   githubRepository: z.string().min(2).max(50),
 });
