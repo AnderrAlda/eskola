@@ -51,7 +51,7 @@ const CreateRoomForm = () => {
             <FormItem>
               <FormLabel>Room Name</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="working on eskola" {...field} />
               </FormControl>
               <FormDescription>This is your rooms name.</FormDescription>
               <FormMessage />
@@ -65,7 +65,10 @@ const CreateRoomForm = () => {
             <FormItem>
               <FormLabel>Room description</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input
+                  placeholder="I will try to create a skool clone using nextjs and with other extra tools"
+                  {...field}
+                />
               </FormControl>
               <FormDescription>Describe your room here please.</FormDescription>
               <FormMessage />
@@ -79,7 +82,7 @@ const CreateRoomForm = () => {
             <FormItem>
               <FormLabel>Coding Language</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="typescript, nextjs, tailwind" {...field} />
               </FormControl>
               <FormDescription>
                 Name the coding languages used here please.
@@ -95,7 +98,10 @@ const CreateRoomForm = () => {
             <FormItem>
               <FormLabel>Github Repository</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input
+                  placeholder="https://github.com/AnderrAlda/eskola.git"
+                  {...field}
+                />
               </FormControl>
               <FormDescription>
                 Link the worked project github repository here please.

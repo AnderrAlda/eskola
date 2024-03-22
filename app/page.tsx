@@ -13,6 +13,7 @@ import {
 import { Room } from "@/db/schema";
 import { Github, Code } from "lucide-react";
 import { getRooms } from "@/services/rooms";
+import { Badge } from "@/components/ui/badge";
 
 const RoomCard = ({
   roomName,
@@ -21,6 +22,8 @@ const RoomCard = ({
   githubRepository,
   id,
 }: Omit<Room, "userId">) => {
+  const languages = codingLanguage.split(",").map((lang) => lang.trim());
+
   return (
     <Card>
       <CardHeader>
@@ -42,7 +45,13 @@ const RoomCard = ({
         )}
         <div className="flex gap-3">
           <Code />
-          <p>{codingLanguage}</p>
+          <div className="flex gap-2 flex-wrap">
+            {languages.map((language, key) => (
+              <Badge className="w-fit" key={key}>
+                {language}
+              </Badge>
+            ))}
+          </div>
         </div>
         <CardFooter className="p-0 pt-3">
           <Button>
@@ -58,9 +67,16 @@ export default async function Home() {
   const rooms = await getRooms();
 
   return (
-    <main className="flex min-h-screen justify-between p-20  container mx-auto">
-      <div>
+    <main className=" min-h-screen p-20 container mx-auto">
+      <div className="flex justify-between">
         <h1 className="font-bold text-4xl">Find Rooms</h1>
+
+        <Button asChild>
+          <Link href="/create-room">Create Room</Link>
+        </Button>
+      </div>
+
+      <div className="grid grid-cols-3 mt-20 gap-4">
         {rooms.map((room, key) => (
           <RoomCard
             key={key}
@@ -72,10 +88,7 @@ export default async function Home() {
           />
         ))}
       </div>
-      {/*       asChild is used in shadcn so that in the DOM will appear only the link but with the style of the button */}
-      <Button asChild>
-        <Link href="/create-room">Create Room</Link>
-      </Button>
     </main>
   );
 }
+//asChild is used in shadcn so that in the DOM will appear only the link but with the style of the button
