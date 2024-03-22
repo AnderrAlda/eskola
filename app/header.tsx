@@ -29,24 +29,25 @@ const AccountDropdown = () => {
             {session.data?.user?.name}
           </Button>
         ) : (
-          <Button onClick={() => signIn("google")}> Sign in</Button>
+          ""
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {session.data ? (
-          <DropdownMenuLabel onClick={() => signOut()}>
+          <DropdownMenuLabel
+            onClick={() =>
+              signOut({
+                callbackUrl: "/",
+              })
+            }
+          >
             <div className="flex gap-3">
               <LogOutIcon />
               <p>Sign Out</p>
             </div>
           </DropdownMenuLabel>
         ) : (
-          <DropdownMenuLabel onClick={() => signIn("google")}>
-            <div className="flex gap-3">
-              <LogInIcon />
-              <p>Sign in</p>
-            </div>
-          </DropdownMenuLabel>
+          ""
         )}
       </DropdownMenuContent>
     </DropdownMenu>
@@ -61,7 +62,16 @@ const Header = () => {
       <div className="flex justify-between items-center">
         <div>LOGO</div>
         <div className="flex items-center gap-5">
-          <AccountDropdown />
+          {session.data ? (
+            <AccountDropdown />
+          ) : (
+            <Button onClick={() => signIn("google")}>
+              <div className="flex gap-3">
+                <LogInIcon />
+                <p>Sign in</p>
+              </div>
+            </Button>
+          )}
           <ModeToggle />
         </div>
       </div>
