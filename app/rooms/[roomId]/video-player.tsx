@@ -14,10 +14,9 @@ import {
 } from "@stream-io/video-react-sdk";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { generateToken } from "@/app/rooms/[roomId]/actions";
 
 const apiKey = process.env.NEXT_PUBLIC_GET_STREAM_API_KEY!;
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTlmNzJlZGMtYWMzOC00ZWEwLThiMjctYmIwYTZmZjFhNDIwIn0.Xe-Eks_Vpqh-6DfsF088pYuo1XMxYsXPF1_7O1b_--4";
 
 export const VideoChat = ({ room }: { room: Room }) => {
   const session = useSession();
@@ -36,7 +35,7 @@ export const VideoChat = ({ room }: { room: Room }) => {
       user: {
         id: userId,
       },
-      token,
+      tokenProvider: () => generateToken(),
     });
     setClient(client);
     const call = client.call("default", room.id);
