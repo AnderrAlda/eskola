@@ -14,6 +14,7 @@ import { Room } from "@/db/schema";
 import { Github, Code } from "lucide-react";
 import { getRooms } from "@/services/rooms";
 import { Badge } from "@/components/ui/badge";
+import SearchBar from "@/app/search-bar";
 
 const RoomCard = ({
   roomName,
@@ -63,8 +64,15 @@ const RoomCard = ({
   );
 };
 
-export default async function Home() {
-  const rooms = await getRooms();
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: {
+    search: string;
+  };
+}) {
+  console.log(searchParams.search);
+  const rooms = await getRooms(searchParams.search);
 
   return (
     <main className=" min-h-screen p-20 container mx-auto">
@@ -74,6 +82,10 @@ export default async function Home() {
         <Button asChild>
           <Link href="/create-room">Create Room</Link>
         </Button>
+      </div>
+
+      <div className="mt-12">
+        <SearchBar />
       </div>
 
       <div className="grid grid-cols-3 mt-20 gap-4">
